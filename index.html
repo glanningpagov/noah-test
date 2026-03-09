@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOAH Bot Test Environment</title>
+    <style>
+        body { font-family: sans-serif; background-color: #f4f4f4; padding: 50px; line-height: 1.6; }
+        .container { max-width: 800px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Agency AI Discovery: Web Messenger Test</h1>
+        <p>This is a lightweight local environment to test the <strong>Genesys Web Messenger</strong> deployment for <strong>Deployment ID: d19be841-24a6-41f2-bf3f-1068f476beaf</strong>.</p>
+        <p>The messenger icon should appear in the bottom-right corner of this page automatically.</p>
+        <hr>
+        <ul>
+            <li><strong>Environment:</strong> FedRAMP US-East-2</li>
+            <li><strong>Status:</strong> Integration Testing</li>
+        </ul>
+    </div>
+
+    <link rel="stylesheet" href="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/themes/df-messenger-default.css">
+<script src="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/df-messenger.js"></script>
+<df-messenger
+  location="us"
+  project-id="copa-li-genesis-chatbot-pr"
+  agent-id="6d7fc502-ddb8-4bc8-9e9c-7dda4af7fbe0"
+  language-code="en"
+  max-query-length="-1">
+  <df-messenger-chat-bubble
+    chat-title="NOAH">
+  </df-messenger-chat-bubble>
+</df-messenger>
+<style>
+  df-messenger {
+    z-index: 999;
+    position: fixed;
+    --df-messenger-font-color: #000;
+    --df-messenger-font-family: Google Sans;
+    --df-messenger-chat-background: #f3f6fc;
+    --df-messenger-message-user-background: #d3e3fd;
+    --df-messenger-message-bot-background: #fff;
+    bottom: 16px;
+    right: 16px;
+  }
+</style>
+    </body>
+</html>
