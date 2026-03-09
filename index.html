@@ -27,6 +27,7 @@
   location="us"
   project-id="copa-li-genesis-chatbot-pr"
   agent-id="6d7fc502-ddb8-4bc8-9e9c-7dda4af7fbe0"
+  intent="Welcome"
   language-code="en"
   max-query-length="-1">
   <df-messenger-chat-bubble
@@ -48,3 +49,24 @@
 </style>
     </body>
 </html>
+<script>
+  let idleTimer;
+
+  function resetChat() {
+    const messenger = document.querySelector('df-messenger');
+    if (messenger) {
+      console.log("Session idle for 5 minutes. Clearing chat.");
+      // This forces the chat to restart and clear the UI
+      messenger.setAttribute('session-id', Math.random().toString(36).substring(7));
+      
+      // If you want to visually hide it or close the bubble:
+      // messenger.renderCustomText("Session expired due to inactivity.");
+    }
+  }
+
+  // Resets the timer every time the user interacts
+  window.addEventListener('df-user-input-entered', () => {
+    clearTimeout(idleTimer);
+    idleTimer = setTimeout(resetChat, 300000); // 300,000ms = 5 minutes
+  });
+</script>
