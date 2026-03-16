@@ -1,125 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Agency AI Discovery: Web Messenger Test</title>
-
-  <script
-    defer
-    src="https://www.gstatic.com/ces-console/fast/chat-messenger/prod/v1.15/chat-messenger.js">
-  </script>
-
-  <link
-    rel="stylesheet"
-    href="https://www.gstatic.com/ces-console/fast/chat-messenger/prod/v1.15/themes/chat-messenger-default.css">
-  <link
-    rel="stylesheet"
-    href="https://www.gstatic.com/ces-console/fast/chat-messenger/prod/v1.15/themes/chat-messenger-layout.css">
-
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #f7f7f7;
-      color: #222;
-    }
-
-    .container {
-      max-width: 900px;
-      margin: 40px auto;
-      padding: 24px;
-      background: #fff;
-      border: 1px solid #ddd;
-      border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-    }
-
-    h1 {
-      margin-top: 0;
-    }
-
-    ul {
-      padding-left: 20px;
-    }
-
-    .status {
-      margin-top: 16px;
-      padding: 12px;
-      background: #f0f4f8;
-      border-left: 4px solid #4a90e2;
-      border-radius: 4px;
-      font-size: 14px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOAH Bot Test Environment</title>
+    <style>
+        body { font-family: sans-serif; background-color: #f4f4f4; padding: 50px; line-height: 1.6; }
+        .container { max-width: 800px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Agency AI Discovery: Web Messenger Test</h1>
-    <p>
-      This is a lightweight local environment to test the
-      <strong>NOAH ARC Staff Assistant</strong> deployment for
-      <strong>Internal GIS resources</strong>.
-    </p>
-    <p>
-      The messenger icon should appear in the bottom-right corner of this page automatically.
-    </p>
-
-    <hr>
-
-    <ul>
-      <li><strong>Environment:</strong> Google Conversational Agents</li>
-      <li><strong>Status:</strong> Integration Testing</li>
-      <li><strong>Messenger:</strong> CX Agent Studio Web Messenger</li>
-    </ul>
-
-    <div class="status">
-      If no activity is detected for 5 minutes, the page will reload and the chat session will reset.
+    <div class="container">
+        <h1>Agency AI Discovery: Web Messenger Test</h1>
+        <p>This is a lightweight local environment to test the <strong>NOAH ARC Staff Assistant</strong> deployment for <strong>Internal GIS resources</strong>.</p>
+        <p>The messenger icon should appear in the bottom-right corner of this page automatically.</p>
+        <hr>
+        <ul>
+            <li><strong>Environment:</strong> Google Conversational Agents</li>
+            <li><strong>Status:</strong> Integration Testing</li>
+        </ul>
     </div>
-  </div>
 
-  <chat-messenger url-allowlist="*">
-    <chat-messenger-container
-      chat-title="NOAH"
-      chat-title-icon="https://gstatic.com/dialogflow-console/common/assets/ccai-favicons/conversational_agents.png"
-      enable-file-upload>
-      <chat-reset-session-button
-        slot="titlebar-actions"
-        title-text="Start new chat">
-      </chat-reset-session-button>
-    </chat-messenger-container>
-  </chat-messenger>
-
-  <script>
-    let idleTimer;
-    const IDLE_TIMEOUT_MS = 5 * 60 * 1000;
-
-    function startIdleTimer() {
-      clearTimeout(idleTimer);
-      idleTimer = setTimeout(() => {
-        console.log("No activity detected for 5 minutes. Reloading page to reset chat session.");
-        window.location.reload();
-      }, IDLE_TIMEOUT_MS);
-    }
-
-    function resetIdleTimer() {
-      startIdleTimer();
-    }
-
-    window.addEventListener("chat-messenger-loaded", () => {
-      chatSdk.registerContext(
-        chatSdk.prebuilts.ces.createContext({
-          deploymentName: "projects/copa-li-genesis-chatbot-pr/locations/us/apps/7114462b-b1fb-4a40-8fac-f99ee1d14dac/deployments/cf5b6f71-aa03-4da7-abcd-9eacc94c07f8",
-        })
-      );
-
-      startIdleTimer();
-    });
-
-    ["click", "keydown", "mousemove", "scroll", "touchstart"].forEach((eventName) => {
-      window.addEventListener(eventName, resetIdleTimer, { passive: true });
-    });
-  </script>
-</body>
+    <link rel="stylesheet" href="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/themes/df-messenger-default.css">
+<script src="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/df-messenger.js"></script>
+<df-messenger
+  location="us"
+  project-id="copa-li-genesis-chatbot-pr"
+  agent-id="6d7fc502-ddb8-4bc8-9e9c-7dda4af7fbe0"
+  intent="Welcome"
+  language-code="en"
+  max-query-length="-1">
+  <df-messenger-chat-bubble
+    chat-title="NOAH">
+  </df-messenger-chat-bubble>
+</df-messenger>
+<style>
+  df-messenger {
+    z-index: 999;
+    position: fixed;
+    --df-messenger-font-color: #000;
+    --df-messenger-font-family: Google Sans;
+    --df-messenger-chat-background: #f3f6fc;
+    --df-messenger-message-user-background: #d3e3fd;
+    --df-messenger-message-bot-background: #fff;
+    bottom: 16px;
+    right: 16px;
+  }
+</style>
+    </body>
 </html>
+<script>
+  let idleTimer;
+
+  function resetChat() {
+    const messenger = document.querySelector('df-messenger');
+    if (messenger) {
+      console.log("Session idle for 5 minutes. Clearing chat.");
+      // This forces the chat to restart and clear the UI
+      messenger.setAttribute('session-id', Math.random().toString(36).substring(7));
+      
+      // If you want to visually hide it or close the bubble:
+      // messenger.renderCustomText("Session expired due to inactivity.");
+    }
+  }
+
+  // Resets the timer every time the user interacts
+  window.addEventListener('df-user-input-entered', () => {
+    clearTimeout(idleTimer);
+    idleTimer = setTimeout(resetChat, 300000); // 300,000ms = 5 minutes
+  });
+</script>
